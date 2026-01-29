@@ -1,4 +1,5 @@
 # Production-Grade Kubernetes Platform on AWS (EKS)
+<sub>Note: Still in testing phase...</sub>
 
 ## Overview
 This project demonstrates the design, deployment, and operation of a
