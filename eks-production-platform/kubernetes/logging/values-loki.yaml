@@ -1,0 +1,21 @@
+loki:
+  enabled: true
+  isDefault: true
+  persistence:
+    enabled: false
+  resources:
+    requests:
+      cpu: 100m
+      memory: 256Mi
+    limits:
+      cpu: 300m
+      memory: 512Mi
+
+promtail:
+  enabled: true
+  config:
+    snippets:
+      pipelineStages:
+        - docker: {}
+    clients:
+      - url: http://loki:3100/loki/api/v1/push
