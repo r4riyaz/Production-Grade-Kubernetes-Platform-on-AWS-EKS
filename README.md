@@ -25,7 +25,7 @@ reliability, security, observability, and automation.
 - Terraform installed on your Base Machine/Virtual Machine [Install Terraform](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli#install-terraform)
 - VSCode Installed on your Base Machine/Virtual Machine [Install VSCode](https://code.visualstudio.com/docs/setup/linux)
 - Git [Install Git](https://git-scm.com/install/linux)
-- kubectl
+- kubectl [Install Kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/)
 - Helm
 
 ## Project Structure
