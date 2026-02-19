@@ -16,18 +16,18 @@ module "vpc" {
   az_count      = var.az_count
 }
 
-# =================================================
+# ==============================================
 # EKS MODULE
-# =================================================
+# ==============================================
 
 module "eks" {
   source = "./eks"
 
-  cluster_name = var.cluster_name
-  vpc_id       = module.vpc.vpc_id
-  subnet_ids   = module.vpc.private_subnet_ids
+  cluster_name    = var.cluster_name
+  cluster_version = var.cluster_version
 
-  enable_irsa = true
+  vpc_id     = module.vpc.vpc_id
+  subnet_ids = module.vpc.private_subnet_ids
 
   depends_on = [module.vpc]
 }
