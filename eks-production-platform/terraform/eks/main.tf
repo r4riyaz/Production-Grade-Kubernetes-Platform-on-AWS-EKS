@@ -8,6 +8,9 @@ module "eks" {
   vpc_id     = var.vpc_id
   subnet_ids = var.subnet_ids
 
+  cluster_endpoint_public_access  = true
+  cluster_endpoint_private_access = true
+
   enable_irsa = true
 
   eks_managed_node_groups = {
