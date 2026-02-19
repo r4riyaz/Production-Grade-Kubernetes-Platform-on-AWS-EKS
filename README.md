@@ -7,7 +7,7 @@ production-grade Kubernetes platform on AWS using EKS. The focus is on
 reliability, security, observability, and automation.
 
 ## Architecture
-- AWS VPC (3 AZ)
+- AWS VPC (2 AZ)
 - EKS cluster (managed control plane)
 - Managed node groups
 - Nginx Ingress Controller
