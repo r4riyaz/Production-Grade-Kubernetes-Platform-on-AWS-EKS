@@ -71,16 +71,9 @@ git clone https://github.com/r4riyaz/Production-Grade-Kubernetes-Platform-on-AWS
 cd Production-Grade-Kubernetes-Platform-on-AWS-EKS/eks-production-platform
 ```
 
-## Step 1: Infrastructure Provisioning
+## Step 1: Infrastructure Provisioning - VPC, EKS Cluster, IAM (IRSA)
 ```
-cd terraform/vpc
-terraform init
-terraform apply
-```
-
-## Step 2: Provision EKS Cluster
-```
-cd terraform/eks
+cd terraform
 terraform init
 terraform apply
 ```
