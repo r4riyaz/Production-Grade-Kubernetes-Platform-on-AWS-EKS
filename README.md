@@ -30,41 +30,49 @@ reliability, security, observability, and automation.
 
 ## Project Structure
 ```
-
 eks-production-platform/
-├── terraform/
-│   ├── vpc/
-│   │   ├── main.tf
-│   │   ├── variables.tf
-│   │   └── outputs.tf
-│   ├── eks/
-│   │   ├── main.tf
-│   │   ├── variables.tf
-│   │   └── outputs.tf
-│   └── iam/
-│       └── irsa.tf
-├── kubernetes/
-│   ├── namespaces/
-│   │   └── namespaces.yaml
-│   ├── rbac/
-│   │   └── readonly-role.yaml
-│   ├── ingress/
-│   │   └── ingress.yaml
-│   ├── monitoring/
-│   │   └── values-prometheus.yaml
-│   └── logging/
-│       └── values-loki.yaml
-├── apps/
-│   └── sample-app/
-│       ├── deployment.yaml
-│       └── service.yaml
-├── ci-cd/
-│   └── Jenkinsfile
-├── diagrams/
-│   └── architecture.png
-└── README.md
+├── apps
+│   └── sample-app
+│       ├── deployment.yml
+│       └── service.yml
+├── ci-cd
+│   └── Jenkinsfile
+├── diagrams
+│   └── architecture.png
+├── kubernetes
+│   ├── ingress
+│   │   └── ingress.yml
+│   ├── irsa
+│   │   └── serviceaccount.yaml
+│   ├── logging
+│   │   └── values-loki.yaml
+│   ├── monitoring
+│   │   └── values-prometheus.yaml
+│   ├── namespaces
+│   │   └── namespace.yml
+│   └── rbac
+│       └── readonly-role.yaml
+├── README.md
+└── terraform
+    ├── eks
+    │   ├── main.tf
+    │   ├── outputs.tf
+    │   └── variables.tf
+    ├── iam
+    │   ├── irsa.tf
+    │   └── variables.tf
+    ├── main.tf
+    ├── outputs.tf
+    ├── terraform.tfstate
+    ├── terraform.tfstate.backup
+    ├── variables.tf
+    └── vpc
+        ├── main.tf
+        ├── outputs.tf
+        └── variables.tf
 
 ```
+
 ## Clone the Repository Locally
 ```
 git clone https://github.com/r4riyaz/Production-Grade-Kubernetes-Platform-on-AWS-EKS.git
@@ -78,11 +86,28 @@ terraform init
 terraform apply
 ```
 
-## Step 3: Configure kubectl
+## Step 2: Configure kubectl
 ```
 aws eks update-kubeconfig --region ap-south-1 --name eks-prod
 kubectl get nodes
 ```
+
+## Step 3: Create Service Account
+```
+kubectl apply -f kubernetes/irsa/serviceaccount.yaml
+```
+Note: How This Works
+- When a pod uses:
+```
+serviceAccountName: app-sa
+```
+EKS does:
+- Pod requests AWS credentials
+- OIDC token is issued
+- IAM role is assumed via IRSA
+- Temporary credentials injected
+- Pod can access AWS (S3 etc.)
+No static credentials required.
 
 ## Step 4: Create Namespaces
 ```
