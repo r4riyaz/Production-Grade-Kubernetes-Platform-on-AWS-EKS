@@ -1,29 +1,29 @@
 variable "region" {
-  description = "AWS region"
-  type        = string
-  default     = "ap-south-1"
+  type    = string
+  default = "ap-south-1"
 }
 
 variable "environment" {
-  description = "Environment name"
-  type        = string
-  default     = "prod"
+  type    = string
+  default = "prod"
 }
 
 variable "cluster_name" {
-  description = "EKS Cluster Name"
-  type        = string
-  default     = "eks-prod"
+  type    = string
+  default = "eks-prod"
+}
+
+variable "cluster_version" {
+  type    = string
+  default = "1.29"
 }
 
 variable "vpc_cidr" {
-  description = "VPC CIDR"
-  type        = string
-  default     = "10.0.0.0/16"
+  type    = string
+  default = "10.0.0.0/16"
 }
 
 variable "az_count" {
-  description = "Number of AZs"
-  type        = number
-  default     = 1
+  type    = number
+  default = 1
 }
