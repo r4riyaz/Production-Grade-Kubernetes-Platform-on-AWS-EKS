@@ -1,29 +1,19 @@
 variable "region" {
-  description = "AWS region"
-  type        = string
-  default     = "ap-south-1"
+  type = string
 }
 
 variable "environment" {
-  description = "Environment name"
-  type        = string
-  default     = "prod"
+  type = string
 }
 
 variable "cluster_name" {
-  description = "EKS cluster name (used for subnet tagging)"
-  type        = string
-  default     = "eks-prod"
+  type = string
 }
 
 variable "vpc_cidr" {
-  description = "VPC CIDR block"
-  type        = string
-  default     = "10.0.0.0/16"
+  type = string
 }
 
 variable "az_count" {
-  description = "Number of availability zones"
-  type        = number
-  default     = 1
+  type = number
 }
