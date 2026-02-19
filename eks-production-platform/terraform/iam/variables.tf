@@ -1,2 +1,7 @@
-variable "oidc_provider_arn" {}
-variable "oidc_provider" {}
+variable "oidc_provider_arn" {
+  type = string
+}
+
+variable "oidc_provider" {
+  type = string
+}
