@@ -1,15 +1,19 @@
 module "eks" {
-  source          = "terraform-aws-modules/eks/aws"
+  source  = "terraform-aws-modules/eks/aws"
+
   cluster_name    = "eks-prod"
   cluster_version = "1.29"
-  subnet_ids      = var.subnet_ids
-  vpc_id          = var.vpc_id
+
+  vpc_id     = var.vpc_id
+  subnet_ids = var.subnet_ids
+
+  enable_irsa = true
 
   eks_managed_node_groups = {
     default = {
-      desired_size = 2
-      max_size     = 3
-      min_size     = 1
+      desired_size   = 2
+      max_size       = 3
+      min_size       = 1
       instance_types = ["t3.medium"]
     }
   }
