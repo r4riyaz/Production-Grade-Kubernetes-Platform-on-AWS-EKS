@@ -25,5 +25,5 @@ variable "vpc_cidr" {
 
 variable "az_count" {
   type    = number
-  default = 1
+  default = 2
 }
