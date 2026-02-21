@@ -21,12 +21,13 @@ reliability, security, observability, and automation.
 ## Prerequisites
 - A base machine/Virtual machine for operations
 - AWS account with an IAM user and access keys
-- AWS CLI installed & configured on your Base Machine/Virtual Machine [Install AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
-- Terraform installed on your Base Machine/Virtual Machine [Install Terraform](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli#install-terraform)
-- VSCode Installed on your Base Machine/Virtual Machine [Install VSCode](https://code.visualstudio.com/docs/setup/linux)
-- Git [Install Git](https://git-scm.com/install/linux)
-- kubectl [Install Kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/)
-- Helm
+- AWS CLI, Terraform, VSCode, Git, Kubectl, Helm installed & configured on your Base Machine/Virtual Machine. Refer below links
+    - [Install AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
+    - [Install Terraform](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli#install-terraform)\
+    - [Install VSCode](https://code.visualstudio.com/docs/setup/linux)
+    - [Install Git](https://git-scm.com/install/linux)
+    - [Install Kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/)
+    - [Install Helm](https://helm.sh/docs/v2/using_helm/install/#from-script)
 
 ## Project Structure
 ```
@@ -81,7 +82,7 @@ cd Production-Grade-Kubernetes-Platform-on-AWS-EKS/eks-production-platform
 
 ## Step 1: Infrastructure Provisioning - VPC, EKS Cluster, IAM (IRSA)
 ```
-cd terraform
+cd eks-production-platform/terraform
 terraform init
 terraform apply
 ```
@@ -92,9 +93,16 @@ aws eks update-kubeconfig --region ap-south-1 --name eks-prod
 kubectl get nodes
 ```
 
-## Step 3: Create Service Account
+## Step 3: Create Namespaces
 ```
-kubectl apply -f kubernetes/irsa/serviceaccount.yaml
+kubectl apply -f eks-production-platform/kubernetes/namespaces/namespace.yml
+kubectl get ns
+```
+
+## Step 4: Create Service Account
+```
+kubectl apply -f eks-production-platform/kubernetes/irsa/serviceaccount.yaml
+kubectl get sa -n dev
 ```
 Note: How This Works
 - When a pod uses:
@@ -109,14 +117,10 @@ EKS does:
 - Pod can access AWS (S3 etc.)
 No static credentials required.
 
-## Step 4: Create Namespaces
-```
-kubectl apply -f kubernetes/namespaces/
-```
-
 ## Step 5: Deploy Sample Application
 ```
-kubectl apply -f apps/sample-app/
+kubectl apply -f eks-production-platform/apps/sample-app/
+kubectl get deployments -n dev
 kubectl get pods -n dev
 ```
 
